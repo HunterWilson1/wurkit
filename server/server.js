@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.set('host', '0.0.0.0');
+
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
