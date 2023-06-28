@@ -14,4 +14,20 @@ const userSchema = new Schema({
     }
 });
 
+userSchema.statics.signup = async function(email, password) {
+
+    const existingUser = await this.findOne({ email });
+
+    if (existingUser) {
+        throw err('Email already used')
+    };
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = bcrypt.hash(password, salt);
+
+    const user = await this.create({ email, password: hash });
+
+    return user;
+}
+
 module.exports = mongoose.model('User', userSchema);
