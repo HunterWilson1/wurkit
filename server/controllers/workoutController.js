@@ -48,7 +48,7 @@ const delWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-const updWorkout = async (req, ers) => {
+const updWorkout = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Workouts from "../components/Workouts";
+import WorkoutForm from "../components/WorkoutForm";
 
 const Home = () => {
     const [workouts, setWorkouts] = useState(null);
@@ -32,7 +33,7 @@ const Home = () => {
             ))}
         </div>
         <div className="col-span-3 md:col-span-1">
-          {/* Content for the right column */}
+          <WorkoutForm />
         </div>
       </div>
     );
