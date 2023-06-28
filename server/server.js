@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express');
+const workouts = require('./routes/workoutRoutes')
 
 const app = express()
 
@@ -8,9 +9,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get('/', (req, res) => {
-    res.json()
-})
+app.use(workouts)
 
 app.listen(process.env.PORT, () => {
     console.log('listening on port 3000')
