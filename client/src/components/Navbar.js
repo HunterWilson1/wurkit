@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -7,6 +7,16 @@ const Navbar = () => {
         <Link to="/" className="text-gray-700 text-2xl font-bold">
           WurkIt
         </Link>
+        <nav>
+          <div>
+            <Link to="/login" className="mr-4 font-bold">
+              Login
+            </Link>
+            <Link to="/signup" className="font-bold">
+              Signup
+            </Link>
+          </div>
+        </nav>
       </div>
     </header>
   );

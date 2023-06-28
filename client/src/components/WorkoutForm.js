@@ -32,7 +32,10 @@ const WorkoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="workout-details bg-white border rounded-md mx-auto my-20 px-20 py-20 relative shadow-md text-center">
+    <form
+      onSubmit={handleSubmit}
+      className="workout-details bg-white border rounded-md mx-auto my-20 px-20 py-20 relative shadow-md text-center"
+    >
       <h3 className="text-xl font-bold mb-4">Add a workout</h3>
 
       <label className="block">
@@ -65,7 +68,10 @@ const WorkoutForm = () => {
         />
       </label>
 
-      <button type="submit" className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md">
+      <button
+        type="submit"
+        className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md"
+      >
         Add workout
       </button>
     </form>
