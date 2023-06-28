@@ -1,5 +1,5 @@
 {
-  "proxy": "https://wurkit-b5ccce7abaaf.herokuapp.com/",
+  "proxy": "http://localhost:3001",
   "name": "wurkit",
   "version": "0.1.0",
   "private": true,

@@ -11,8 +11,8 @@ const app = express();
 app.set('host', '0.0.0.0');
 
 app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
+  console.log(req.path, req.method);
+  next();
 });
 
 app.use(bodyParser.json());
@@ -20,10 +20,14 @@ app.use('/api/workouts', workouts);
 app.use('/api/user', userRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log('listening on port 3001');
+    const port = process.env.PORT || 3001;
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}`);
     });
   })
   .catch((err) => {
