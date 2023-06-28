@@ -16,7 +16,7 @@ app.use('/api/workouts', workouts);
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     app.listen(process.env.PORT, () => {
-        console.log('listening on port 3000')
+        console.log('listening on port 3001')
     })
 })
 .catch((err) => {
