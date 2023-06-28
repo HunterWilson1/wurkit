@@ -1,10 +1,15 @@
-const { useState } = require("react");
+import { useState } from 'react';
+import { useSignup } from '../hooks/useSignup';
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { signup, isLoading, error } = useSignup();
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await signup(email, password);
   };
 
   return (
@@ -32,8 +37,10 @@ const Signup = () => {
           />
         </label>
 
-        <button type="submit" className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md">
-          Signup
+        {error && <p className="text-red-500">{error}</p>}
+
+        <button type="submit" className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md" disabled={isLoading}>
+          {isLoading ? 'Signing up...' : 'Signup'}
         </button>
       </form>
     </div>
