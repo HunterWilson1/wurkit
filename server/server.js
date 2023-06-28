@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const path = require("path");
 const express = require('express');
 const mongoose = require('mongoose');
 const workouts = require('./routes/workoutRoutes');
@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.set('host', '0.0.0.0');
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -18,6 +17,15 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use('/api/workouts', workouts);
 app.use('/api/user', userRoutes);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 mongoose
   .connect(process.env.MONGO_URI, {
