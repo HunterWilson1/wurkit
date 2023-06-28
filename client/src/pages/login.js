@@ -1,15 +1,22 @@
 const { useState } = require("react");
+const { useLogin } = require("../hooks/useLogin");
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useLogin();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await login(email, password);
   };
 
   return (
     <div className="grid place-items-center h-screen">
-      <form onSubmit={handleSubmit} className="workout-details bg-white border rounded-md px-20 py-20 relative shadow-md text-center">
+      <form
+        onSubmit={handleSubmit}
+        className="workout-details bg-white border rounded-md px-20 py-20 relative shadow-md text-center"
+      >
         <h3 className="text-xl font-bold mb-4">Login</h3>
 
         <label className="block">
@@ -32,7 +39,10 @@ const Login = () => {
           />
         </label>
 
-        <button type="submit" className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md">
+        <button
+          type="submit"
+          className="btn-primary mt-4 bg-rose-500 hover:bg-rose-600 p-2 rounded-md"
+        >
           Login
         </button>
       </form>
