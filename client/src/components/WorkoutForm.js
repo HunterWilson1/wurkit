@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-
-const { useState } = require("react");
+import { useWorkoutsContext } from "../hooks/useWo";
 
 const WorkoutForm = () => {
-  const { user } = useAuthContext;
+  const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
   const [title, setTitle] = useState("");
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
@@ -23,21 +24,20 @@ const WorkoutForm = () => {
       body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
+        Authorization: `Bearer ${user.token}`,
       },
     });
+
     const json = await response.json();
 
     if (!response.ok) {
-      setErr(json.err);
-    }
-    if (response.ok) {
+      setErr(json);
+    } else {
       setTitle("");
       setReps("");
       setWeight("");
       setErr(null);
+      dispatch({ type: "CREATE_WORKOUT", payload: json });
     }
   };
 
@@ -47,6 +47,10 @@ const WorkoutForm = () => {
       className="workout-details bg-white border rounded-md mx-auto my-20 px-20 py-20 relative shadow-md text-center"
     >
       <h3 className="text-xl font-bold mb-4">Add a workout</h3>
+
+      {err && (
+        <p className="text-red-500 mt-2">{Object.values(err).join(", ")}</p>
+      )}
 
       <label className="block">
         Exercise:
