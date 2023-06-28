@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import Workouts from "../components/Workouts";
 import WorkoutForm from "../components/WorkoutForm";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
   const [workouts, setWorkouts] = useState(null);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
-        const response = await fetch("/api/workouts");
+        const response = await fetch("/api/workouts", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         const json = await response.json();
 
         if (response.ok) {
@@ -21,8 +27,10 @@ const Home = () => {
       }
     };
 
-    fetchWorkouts();
-  }, []);
+    if (user) {
+      fetchWorkouts();
+    }
+  }, [user]);
 
   return (
     <div className="Home grid grid-cols-3 gap-8">

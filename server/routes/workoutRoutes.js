@@ -6,9 +6,10 @@ const {
   delWorkout,
   updWorkout,
 } = require("../controllers/workoutController");
+const auth = require("../utils/auth");
 
 const router = express.Router();
-
+router.use(auth);
 //gets all
 router.get("/", getWorkouts);
 
